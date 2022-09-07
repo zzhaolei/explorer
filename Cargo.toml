@@ -1,0 +1,15 @@
+[package]
+name = "explorer"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.64"
+axum = "0.5.15"
+log = "0.4.17"
+thiserror = "1.0.34"
+tokio = { version = "1.21.0", features = ["full"] }
+tracing = "0.1.36"
+tracing-subscriber = "0.3.6"
