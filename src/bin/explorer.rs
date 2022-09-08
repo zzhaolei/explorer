@@ -2,12 +2,12 @@ use std::net::SocketAddr;
 
 use anyhow::Result;
 use axum::Router;
-use explorer::preclude::*;
+use explorer::prelude::*;
 use tokio::signal;
 
 async fn server(app: Router) -> Result<()> {
     let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
-    debug!("Listening addr {:?}", addr);
+    info!("Listening addr {:?}", addr);
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
         .with_graceful_shutdown(shutdown_signal())
@@ -44,7 +44,7 @@ async fn shutdown_signal() {
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
-    let app = Router::new().merge(account::app());
+    let app = Router::new().merge(auth::app());
     match server(app).await {
         Ok(()) => info!("Server Shutdown"),
         Err(err) => error!("Server Error, {}", err),
