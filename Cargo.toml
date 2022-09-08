@@ -9,6 +9,7 @@ edition = "2021"
 anyhow = "1.0.64"
 axum = "0.5.15"
 log = "0.4.17"
+serde = { version = "1.0.144", features = ["derive"] }
 thiserror = "1.0.34"
 tokio = { version = "1.21.0", features = ["full"] }
 tracing = "0.1.36"
