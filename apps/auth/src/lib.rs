@@ -1,7 +1,7 @@
 use axum::routing::post;
 use axum::Router;
-mod handler;
+mod handles;
 
 pub fn app() -> Router {
-    Router::new().route("/login", post(handler::login))
+    Router::new().route("/login", post(handles::login))
 }
