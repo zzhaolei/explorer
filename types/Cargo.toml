@@ -1,10 +1,9 @@
 [package]
-name = "auth"
+name = "types"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-axum = "0.5.15"
-types = {path="../../types"}
+serde = { version = "1.0.144", features = ["derive"] }
