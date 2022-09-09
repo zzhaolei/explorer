@@ -5,6 +5,10 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features]
+local = ["config/local"]
+dev = ["config/dev"]
+
 [dependencies]
 anyhow = "1.0.64"
 axum = "0.5.15"
@@ -15,7 +19,11 @@ tokio = { version = "1.21.0", features = ["full"] }
 tracing = "0.1.36"
 tracing-subscriber = "0.3.6"
 
-# 所有app的API在此引入
+# 所有的app（包括config，types等本地库）在此引入
 [dependencies.auth]
 path = "../apps/auth"
+version = "0.1.0"
+
+[dependencies.config]
+path = "../config"
 version = "0.1.0"

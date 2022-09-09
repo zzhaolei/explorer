@@ -6,7 +6,8 @@ use launcher::prelude::*;
 use tokio::signal;
 
 async fn server(app: Router) -> Result<()> {
-    let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
+    let addr = SocketAddr::from((CONFIG.http.host, CONFIG.http.port));
+
     info!("Listening addr {:?}", addr);
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
@@ -17,15 +18,13 @@ async fn server(app: Router) -> Result<()> {
 
 async fn shutdown_signal() {
     let ctrl_c = async {
-        signal::ctrl_c()
-            .await
-            .expect("failed to install Ctrl+C handler");
+        signal::ctrl_c().await.expect("无法监听Ctrl+C信号");
     };
 
     #[cfg(unix)]
     let terminate = async {
         signal::unix::signal(signal::unix::SignalKind::terminate())
-            .expect("failed to install signal handler")
+            .expect("无法监听信号")
             .recv()
             .await;
     };
@@ -44,7 +43,10 @@ async fn shutdown_signal() {
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
+    info!("enabled `{}` feature.", &CONFIG.env_flag);
+
     let app = Router::new().merge(auth::app());
+
     match server(app).await {
         Ok(()) => info!("Server Shutdown"),
         Err(err) => error!("Server Error, {}", err),
