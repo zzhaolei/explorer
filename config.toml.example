@@ -1,0 +1,12 @@
+# 请克隆本文件，并修改为 config.toml 用作配置文件
+debug = false
+
+[http]
+host = [127, 0, 0, 1]
+port = 8080
+
+[jwt]
+expire = 120
+
+[database]
+url = "sqlite://explorer.sqlite"

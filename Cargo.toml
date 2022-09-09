@@ -3,4 +3,5 @@ members = [
     "apps/*",
     "launch",
     "types",
+    "config",
 ]
