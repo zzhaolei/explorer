@@ -7,4 +7,4 @@ edition = "2021"
 
 [dependencies]
 axum = "0.5.15"
-types = {path="../../types"}
+explorer-types = { path = "../../types", features = ["database"] }
