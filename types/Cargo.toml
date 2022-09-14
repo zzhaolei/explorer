@@ -1,9 +1,15 @@
 [package]
-name = "types"
+name = "explorer-types"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+database = ["crypto-utils", "hex", "sqlx"]
 
 [dependencies]
-serde = { version = "1.0.133", features = ["derive"] }
+serde = { version = "1.0.144", features = ["derive"] }
+uuid = { version = "1.1.2", features = ["v5"] }
+hex = { version = "0.4.3", optional = true }
+crypto-utils = { version = "0.4.0", features = ["sha"], optional = true }
+sqlx = { version = "0.6.1", optional = true }
